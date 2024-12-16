@@ -6,6 +6,7 @@ import cv2 # pip install opencv-python
 import numpy as np # pip install numpy
 from flask_cors import CORS
 from random import randint
+app = Flask(__name__)
 
 model = None
 data = dict()
@@ -92,7 +93,7 @@ def load_model():
 app = Flask(__name__)
 cors = CORS(app)
 
-@app.route("/")
+@app.route('/')
 def main():
     return """
         Application is working
@@ -100,7 +101,7 @@ def main():
 
 
 # Process images
-@app.route("/image_recognition", methods=["POST"])
+@app.route('/image_recognition', methods=['POST'])
 def processReq():
     data = request.files["img"]
     data.save("img.jpg")
@@ -108,6 +109,6 @@ def processReq():
 
     return resp
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
     load_model()
